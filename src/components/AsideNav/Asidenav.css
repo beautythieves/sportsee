@@ -1,0 +1,38 @@
+.aside-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px; /* ajustez la largeur selon vos besoins */
+    height: 100%;
+    background-color:black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index:1;
+  }
+  
+  .icons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: last baseline;
+  }
+  
+  .icons-container a {
+    margin-bottom: 10px;
+  }
+  
+  .icons-container img {
+    width: 40px;
+    height: 40px;
+  }
+  p{
+   
+        color: white;
+        writing-mode: tb-rl;
+        transform: rotate(180deg);
+        font-size:12px;
+      }
+      
+  

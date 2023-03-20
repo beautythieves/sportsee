@@ -4,11 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/Header/Header';
+import AsideNav from './components/AsideNav/Asidenav';
+import ScoreChart from './components/ScoreChart/ScoreChart';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Header />
+    <AsideNav />
+    <ScoreChart/>
     <App />
+
   </React.StrictMode>
 );
 
