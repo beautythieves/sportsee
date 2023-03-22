@@ -1,6 +1,6 @@
 import { PieChart, Pie, Cell, Legend } from 'recharts';
 import React, {useEffect} from 'react';
-import { getUserMainData } from '../../dataManager/dataManager';
+import { getUserMainData } from '../../../dataManager/dataManager';
 /* create a variable to store the data from the API */
 const ScoreChart = () => {
 
@@ -8,6 +8,7 @@ const ScoreChart = () => {
       const fetchData = async () => {
         const userId = 18;
         const rawdata = await getUserMainData(userId);
+
         console.log(rawdata);
       };
   

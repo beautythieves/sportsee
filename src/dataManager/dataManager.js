@@ -1,3 +1,7 @@
+/**
+ * @typedef {import ('./typedef.js').mainData} mainData
+ */
+
 const server = "http://localhost:3000/user"
 const useMockedData = !window.location.search.includes("mockedData");
 let mockedData = {
@@ -16,6 +20,13 @@ async function importData() {
   mockedData = await import("./data.js");
 }
 
+/**
+ * [async description]
+ *
+ * @param   {Number}  userId  [userId description]
+ *
+ * @return  {mainData}          [return description]
+ */
 async function getUserMainData(userId) {
   const  rawUserMainData = useMockedData 
     ? mockedData.USER_MAIN_DATA 

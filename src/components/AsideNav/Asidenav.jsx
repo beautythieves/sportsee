@@ -7,7 +7,7 @@ import "./Asidenav.css";
 export default function AsideNav() {
   return (
     <aside className="aside-container">
-      <div classname="icons-container">
+      <div className="icons-container">
         <a href="/">
           <img src={yoga} alt="icone 1" />
         </a>
