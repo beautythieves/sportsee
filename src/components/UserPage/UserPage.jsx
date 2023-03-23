@@ -1,8 +1,19 @@
 import React from 'react';
-import { getUserMainData } from '../../dataManager/dataManager';
+
+import WelcomeMessage from '../WelcomeMessage/WelcomeMessage';
 
 function UserPage(props) {
-  // le code de votre composant
+  console.log('UserPage rendered with props:', props);
+
+  const userId = props.match ? props.match.params.userId : null;
+
+  return (
+    <div>
+      {userId ? <WelcomeMessage userId={userId} /> : null}
+      {/* Render other components and charts here */}
+    </div>
+  );
 }
 
 export default UserPage;
+
