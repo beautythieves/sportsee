@@ -21,18 +21,19 @@ async function importData() {
 }
 
 /**
- * [async description]
+ * [@async]
  *
  * @param   {Number}  userId  [userId description]
  *
  * @return  {mainData}          [return description]
  */
-async function getUserMainData(userId) {
-  const  rawUserMainData = useMockedData 
+ async function getUserMainData() {
+  const rawUserData = useMockedData 
     ? mockedData.USER_MAIN_DATA 
-    : await importFromBackEnd(userId);
-    const userMainData = {...rawUserMainData} //données traitées
-    return userMainData;
+    : await importFromBackEnd('');
+  const userData = Object.values(rawUserData); // transforme l'objet en tableau
+  return userData;
 }
+
 /* ajout simon*/
 export {getUserMainData};

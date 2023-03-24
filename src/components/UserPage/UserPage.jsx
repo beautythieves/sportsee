@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getUserMainData } from '../../dataManager/dataManager';
+import UserGreeting from '../UserGreeting/UserGreeting';
 
-import WelcomeMessage from '../WelcomeMessage/WelcomeMessage';
+function UserPage() {
+  const { userId } = useParams();
+  const [userData, setUserData] = useState(null);
 
-function UserPage(props) {
-  console.log('UserPage rendered with props:', props);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getUserMainData(userId);
+      setUserData(data);
+    }
+    fetchData();
+  }, [userId]);
 
-  const userId = props.match ? props.match.params.userId : null;
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
-      {userId ? <WelcomeMessage userId={userId} /> : null}
-      {/* Render other components and charts here */}
+      <UserGreeting userId={userId} />
+      {/* Afficher d'autres informations utilisateur ici */}
     </div>
   );
 }

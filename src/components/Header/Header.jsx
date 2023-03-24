@@ -9,7 +9,7 @@ export default function Header() {
             <a href="/" >Accueil</a>
           </h1>
           <h1 className="header-about">
-            <a href="/about">Profil5455</a>
+            <a href="/about">Profil55</a>
           </h1>
           <h1 className= "header-services">
             <a href="/services">Réglages</a>
