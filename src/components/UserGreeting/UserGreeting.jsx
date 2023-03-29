@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getUserMainData } from '../../dataManager/dataManager';
-import './UserGreeting.css';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getUserMainData } from "../../dataManager/dataManager";
+import "./UserGreeting.css";
 
 function UserGreeting() {
-  const { userId } = useParams();
+  const { userId } = useParams(); /* extract userId from the url */
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
 
@@ -12,7 +12,8 @@ function UserGreeting() {
     async function fetchData() {
       try {
         const data = await getUserMainData();
-        const userData = data.find((u) => u.id === parseInt(userId));
+        const userData = data.find((u) => u.id === parseInt(userId, 10));
+        console.log(userData);
         setUser(userData);
       } catch (err) {
         console.log(err);
@@ -32,7 +33,10 @@ function UserGreeting() {
 
   return (
     <div>
-      <h1 className="hello">Bonjour {user.userInfos.firstName}!</h1>
+      <h1 className="hello">
+        Bonjour <span className="firstName">{user.userInfos.firstName}</span>
+      </h1>
+      <h2> Félicitation ! Vous avez explosé vos objectifs hier 👏</h2>
     </div>
   );
 }
