@@ -4,6 +4,9 @@ import { getUserMainData } from "../../dataManager/dataManager";
 
 import UserGreeting from "../UserGreeting/UserGreeting";
 import UserPieChart from "../Charts/ScoreChart/ScoreChart";
+import CalorieCount from "../Energy/Calory";
+import Proteins from "../Energy/Protein";
+import DailyActivityChart from "../Charts/DailyActivityChart/DailyActivityChart";
 function UserPage() {
   const { userId } = useParams();
   const [userData, setUserData] = useState(null);
@@ -24,7 +27,10 @@ function UserPage() {
     <div className="UserContainer" style={{ marginLeft: "200px" }}>
       {" "}
       <UserGreeting userId={userId} />
+      <DailyActivityChart>  </DailyActivityChart>
       <UserPieChart>  </UserPieChart>
+      <CalorieCount></CalorieCount>
+      <Proteins></Proteins>
     </div>
   );
 }
