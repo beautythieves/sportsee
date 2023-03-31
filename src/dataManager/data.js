@@ -1,6 +1,6 @@
 const USER_MAIN_DATA = [
     {
-        id: 12,
+        userId: 12,
         userInfos: {
             firstName: 'Karl',
             lastName: 'Dovineau',
@@ -15,9 +15,9 @@ const USER_MAIN_DATA = [
         }
     },
     {
-        id: 18,
+        userId: 18,
         userInfos: {
-            firstName: 'Cecilia',
+            firstName: 'Cjuiecilia',
             lastName: 'Ratorez',
             age: 34,
         },
