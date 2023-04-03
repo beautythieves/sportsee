@@ -78,8 +78,8 @@ export { getUserActivity };
  */
 async function getUserAverageSessions(id) {
   const rawUserData = useMockedData
-    ? mockedData.USER_AVERAGE_SESSIONS
-    : await importFromBackEnd('',id);
+    ? await getMockedData("USER_AVERAGE_SESSIONS", id)
+    : await importFromBackEnd('average-sessions',id);
   const userData = Object.values(rawUserData); // Transform the object into an array
   return userData;
 }
