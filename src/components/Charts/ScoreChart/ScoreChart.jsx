@@ -4,65 +4,65 @@ import { getUserMainData } from "../../../dataManager/dataManager";
 import { PieChart, Pie, Cell, Label } from "recharts";
 
 /**
- * UserPieChart - A React component that displays a pie chart representing a user's score.
- * @component
+ * UserPieChart component displays a pie chart of a user's score.
+ * @returns {JSX.Element}
  */
-// Define a new React component called UserPieChart
 function UserPieChart() {
-  // Get the userId parameter from the URL using the useParams hook
+  // Extract userId from the URL using useParams
   const { userId } = useParams();
-  // Declare two state variables: user and error
+
+  // Initialize state variables for user data and error
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
 
-  // Use the useEffect hook to fetch data when the component mounts or when userId changes
+  // Fetch user data when the component mounts or when userId changes
   useEffect(() => {
-    // Define an async function to fetch data
+    /**
+     * Fetches user data and updates the state.
+     * @async
+     */
     async function fetchData() {
       try {
-        // Call the getUserMainData function with the userId parameter to get the user's main data
-        const data = await getUserMainData(userId);
-        // Filter the data to find the user with matching id
-        const userData = data.find((u) => u.id === parseInt(userId));
-        // Update the user state variable with the found user data
+        // Get user data from the data manager
+        const userData = await getUserMainData(userId);
+
+        // Update the user state with the fetched data
         setUser(userData);
       } catch (err) {
-        // If there is an error fetching the data, set the error state variable to true
         console.log(err);
         setError(true);
       }
     }
-    // Call the fetchData function to fetch the data
     fetchData();
   }, [userId]);
 
-  // If there is an error fetching data, return an error message
+  // Display an error message if the data failed to load
   if (error) {
-    return <div>Error: Failed to load user data.</div>;
+    return <div>Error: Failed to load user data for pie chart.</div>;
   }
 
-  // If user data is not yet loaded, return a loading message
+  // Display a loading message if user data is not yet loaded
   if (!user) {
     return <div>Loading...</div>;
   }
 
-  // Extract the todayScore property from the user data
+  // Get today's score from the user data
   const { todayScore } = user;
 
-  // Define an array of data for the pie chart
+  // Define the data for the pie chart
   const data = [
     { name: "Score", value: todayScore },
     { name: "Reste", value: 1 - todayScore },
   ];
 
-  // Define an array of colors for the pie chart wedges
+  // Define the colors for the pie chart slices
   const COLORS = ["#0088FE", "#FFBB28"];
 
-  // Render the pie chart
+  // Render the pie chart with the user score data
   return (
-    <div style={{ width: "100%", height: 300 }}>
+    <div className="Pie" style={{ width: "100%", height: 300 }}>
       <PieChart width={300} height={300}>
-        {/* Add a text label to the center of the pie chart */}
+        {/* Add a label for the chart */}
         <text
           x={50}
           y={50}
@@ -71,8 +71,6 @@ function UserPieChart() {
         >
           Score
         </text>
-
-        {/* Define the Pie element with the specified props */}
         <Pie
           data={data}
           cx="50%"
@@ -83,11 +81,11 @@ function UserPieChart() {
           paddingAngle={5}
           dataKey="value"
         >
-          {/* For each item in the data array, add a corresponding Cell element using the COLORS array */}
+          {/* Add slices for the chart */}
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
-          {/* Add a Label to the center of the pie chart with the todayScore percentage */}
+          {/* Add a label for the chart */}
           <Label
             value={`${Math.round(todayScore * 100)}%\n de votre\n objectif`}
             position="center"
@@ -103,5 +101,4 @@ function UserPieChart() {
   );
 }
 
-// Export the UserPieChart component as default
 export default UserPieChart;

@@ -25,7 +25,6 @@ function UserGreeting() {
       try {
         // Get user main data from the data manager
         const userData = await getUserMainData(userId);
-        console.log("userData", userData);
         
         // Find the user with the matching userId
         // const userData = data.find((u) => u.id === parseInt(userId, 10));

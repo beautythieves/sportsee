@@ -7,7 +7,7 @@ const server = "http://localhost:3000/user";
 const useMockedData = window.location.search.includes("mockedData");
 
 // Initialize an object to store mocked data if it is used
-let  mockedData = {
+let mockedData = {
   USER_MAIN_DATA: {},
   USER_ACTIVITY: {},
   USER_AVERAGE_SESSIONS: {},
@@ -23,12 +23,10 @@ let  mockedData = {
  * @returns {Promise<Object>} - The fetched data.
  */
 async function importFromBackEnd(endPoint, id) {
-  if (endPoint !== '') endPoint = '/' + endPoint; 
-  const response = await fetch(server +"/" + id + endPoint);
+  if (endPoint !== "") endPoint = "/" + endPoint;
+  const response = await fetch(server + "/" + id + endPoint);
   const data = await response.json();
-  return data.data
-    ?data.data
-    :data;
+  return data.data ? data.data : data;
 }
 
 /**
@@ -47,8 +45,8 @@ async function importMockedData() {
 async function getUserMainData(id) {
   // Get raw user data, either from the mocked data or from the backend server
   const rawUserData = useMockedData
-    ? await getMockedData("USER_MAIN_DATA",id)
-    : await importFromBackEnd('', id);
+    ? await getMockedData("USER_MAIN_DATA", id)
+    : await importFromBackEnd("", id);
   // Transform the object into an array and return it
   // const userData = Object.values(rawUserData);
   return rawUserData;
@@ -59,14 +57,46 @@ export { getUserMainData };
 /**
  * Fetches user activity data from the server or mocked data.
  * @async
- * @returns {Array} - The user activity data.
+ * @returns {Object} - The user activity data.
  */
 async function getUserActivity(id) {
   const rawUserData = useMockedData
     ? await getMockedData("USER_ACTIVITY", id)
-    : await importFromBackEnd('activity', id);
-  const userData = Object.values(rawUserData); // Transform the object into an array
-  return userData;
+    : await importFromBackEnd("activity", id);
+
+  const userData = Object.values(rawUserData);
+
+  const sessions = userData[1];
+  const sessionsByDay = {};
+
+  // Sum the calories and kilograms for each day
+  for (let session of sessions) {
+    const day = session.day;
+
+    if (!(day in sessionsByDay)) {
+      sessionsByDay[day] = {
+        calories: 0,
+        kilograms: 0,
+      };
+    }
+
+    sessionsByDay[day].calories += session.calories;
+
+    if ("kilograms" in session) {
+      sessionsByDay[day].kilograms += session.kilograms;
+    }
+  }
+
+  // Convert the sessionsByDay object into an array of objects for the chart data
+  const chartData = Object.keys(sessionsByDay).map((day) => {
+    return {
+      day,
+      calories: sessionsByDay[day].calories,
+      kilograms: sessionsByDay[day].kilograms,
+    };
+  });
+
+  return chartData;
 }
 
 export { getUserActivity };
@@ -79,7 +109,7 @@ export { getUserActivity };
 async function getUserAverageSessions(id) {
   const rawUserData = useMockedData
     ? await getMockedData("USER_AVERAGE_SESSIONS", id)
-    : await importFromBackEnd('average-sessions',id);
+    : await importFromBackEnd("average-sessions", id);
   const userData = Object.values(rawUserData); // Transform the object into an array
   return userData;
 }
@@ -94,18 +124,17 @@ export { getUserAverageSessions };
 async function getUserPerformance(id) {
   const rawUserData = useMockedData
     ? await getMockedData("USER_PERFORMANCE", id)
-    : await importFromBackEnd('performance', id);
-    console.log("RAW USER DATA: ", rawUserData )
+    : await importFromBackEnd("performance", id);
+  console.log("RAW USER DATA: ", rawUserData);
   // const userData = Object.values(rawUserData); // Transform the object into an array
   return rawUserData;
 }
 
-async function getMockedData(src, userId){
-  if (Object.keys(mockedData[src]).length === 0) await importMockedData()
+async function getMockedData(src, userId) {
+  if (Object.keys(mockedData[src]).length === 0) await importMockedData();
   const data = mockedData[src].find((u) => u.userId === parseInt(userId));
   console.log(data, mockedData[src], mockedData, src);
-  return data
+  return data;
 }
-
 
 export { getUserPerformance };

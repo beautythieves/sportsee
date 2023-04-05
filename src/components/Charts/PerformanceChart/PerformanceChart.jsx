@@ -56,8 +56,8 @@ function PerformanceChart() {
   }, [userId]);
 
   return (
-    <div className="radar-chart-container">
-      <RadarChart cx={300} cy={250} outerRadius={200} width={600} height={500} data={data}>
+    <div className="Perf">
+      <RadarChart cx={129} cy={131.5} outerRadius={110} width={258} height={263} data={data} legend={{ fontSize: 12 }}>
         <PolarGrid />
         <PolarAngleAxis dataKey="name" />
         <Radar name="Performance" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />

@@ -8,8 +8,12 @@ background-color: crimson;
 }
 .firstName{
     color:  #FF0101;
+    font-size: 48px;
     
 }
 .userGreetingMessage{
     color: red;
+}
+h2{
+font-size: 18px;
 }
