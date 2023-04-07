@@ -42,10 +42,11 @@ function UserCalories() {
         <img src={Calory} alt="Calorie icon" />
       </div>
       <div className="Calory_Number">
-        {kcalCount} Kcal
-        <br />
-        Calories
-      </div>
+  <span className="kcal">{kcalCount} Kcal</span>
+  <br />
+  <span className="calories">Calories</span>
+</div>
+
     </div>
   );
 }

@@ -72,7 +72,6 @@ async function getUserActivity(id) {
   // Sum the calories and kilograms for each day
   for (let session of sessions) {
     const day = session.day;
-
     if (!(day in sessionsByDay)) {
       sessionsByDay[day] = {
         calories: 0,
@@ -82,11 +81,10 @@ async function getUserActivity(id) {
 
     sessionsByDay[day].calories += session.calories;
 
-    if ("kilograms" in session) {
-      sessionsByDay[day].kilograms += session.kilograms;
+    if ("kilogram" in session) {
+      sessionsByDay[day].kilograms += session.kilogram;
     }
   }
-
   // Convert the sessionsByDay object into an array of objects for the chart data
   const chartData = Object.keys(sessionsByDay).map((day) => {
     return {
@@ -122,6 +120,7 @@ export { getUserAverageSessions };
  * @returns {Array} - The user performance data.
  */
 async function getUserPerformance(id) {
+  console.log("getUserPerformance called with id:", id);
   const rawUserData = useMockedData
     ? await getMockedData("USER_PERFORMANCE", id)
     : await importFromBackEnd("performance", id);

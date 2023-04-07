@@ -40,9 +40,9 @@ function Carbohydrate () {
         <img src={Carbo} alt="Carbohydrate icon" />
       </div>
       <div className="Calory_Number">
-        {carbohydrateCount} g
+        <span className = "kcal">{carbohydrateCount} g</span>
         <br />
-        Glucides
+        <span className="calories">Glucides</span>
       </div>
     </div>
   );

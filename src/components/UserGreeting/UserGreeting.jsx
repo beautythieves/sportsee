@@ -54,7 +54,7 @@ function UserGreeting() {
 
   // Render the greeting message with the user's first name
   return (
-    <div>
+    <div className="GreetingContainer">
       <h1 className="hello">
         Bonjour <span className="firstName">{user.userInfos.firstName}</span>
       </h1>

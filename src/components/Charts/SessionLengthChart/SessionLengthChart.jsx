@@ -74,6 +74,13 @@ function SessionLengthChart() {
     return `${hours > 0 ? `${hours}h ` : ""}${minutes}min`;
   };
 
+  // Format the tooltip for the chart
+  const formatTooltip = (value) => {
+    const hours = Math.floor(value / 60);
+    const minutes = value % 60;
+    return `${hours > 0 ? `${hours}h ` : ""}${minutes}min`;
+  };
+
   // Render the line chart with the user session data
   return (
     <div className="Session">
@@ -91,14 +98,10 @@ function SessionLengthChart() {
           tickFormatter={formatLabel}
         />
         <Tooltip
-          formatter={(value) => {
-            const hours = Math.floor(value / 60);
-            const minutes = value % 60;
-            return `${hours > 0 ? `${hours}h ` : ""}${minutes}min`;
-          }}
+          formatter={formatTooltip}
           contentStyle={{ width: 39, height: 25 }}
         />
-
+        <CartesianGrid stroke="#f5f5f5" vertical={false} />
         <CartesianGrid stroke="#f5f5f5" vertical={false} />
         <Line type="monotone" dataKey="sessionLength" stroke="#fff" />
       </LineChart>
