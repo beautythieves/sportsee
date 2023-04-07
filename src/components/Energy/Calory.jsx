@@ -3,7 +3,7 @@ import { getUserMainData } from "../../dataManager/dataManager";
 import { useParams } from "react-router-dom";
 import Calory from "./Calory.png";
 import "./Calory.css";
-
+import backgroundCalory from "./backgroundCalory.png";
 function UserCalories() {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
@@ -20,7 +20,6 @@ function UserCalories() {
         setError(true);
       }
     }
-    
 
     fetchData();
   }, [userId]);
@@ -37,16 +36,16 @@ function UserCalories() {
   const kcalCount = calorieCount / 1000;
 
   return (
-    <div className="Calory_Container" >
-      <div className="Calory_Button">
-        <img src={Calory} alt="Calorie icon" />
+<div className="Calory_Container" style={{ paddingLeft: "27px" }}>
+
+<div className="Calory_Button" style={{backgroundImage: `url(${backgroundCalory})`}}> 
+       <img src={Calory} alt="Calorie icon" />
       </div>
       <div className="Calory_Number">
-  <span className="kcal">{kcalCount} Kcal</span>
-  <br />
-  <span className="calories">Calories</span>
-</div>
-
+        <span className="kcal">{kcalCount} Kcal</span>
+        <br />
+        <span className="calories">Calories</span>
+      </div>
     </div>
   );
 }

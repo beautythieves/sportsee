@@ -56,12 +56,11 @@ function UserPieChart() {
   ];
 
   // Define the colors for the pie chart slices
-  const COLORS = ["#0088FE", "#FFBB28"];
+  const COLORS = ["#FF0000", "#FFFFFF"];
 
   // Render the pie chart with the user score data
   return (
-    <div className="Pie" style={{ width: "100%", height: 300 }}>
-      <PieChart width={300} height={300}>
+    <div className="Pie" style={{ width: "100%", height: 300, background: "#FBFBFB" }}>      <PieChart width={300} height={300}>
         {/* Add a label for the chart */}
         <text
           x={50}

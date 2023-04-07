@@ -6,10 +6,12 @@
     height: 124px;
     padding: 0 20px;
 }
+.Cal{
+  padding-right: 24px;
+}
 .Calory_Button {
     width: 60px;
     height: 60px;
-    background-color: lightblue;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,5 +33,5 @@
   
   .calories {
     font-size: 14px;
-font-weight: 500px;   }
+font-weight: 500;   }
   

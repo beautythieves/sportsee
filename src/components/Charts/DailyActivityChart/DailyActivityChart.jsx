@@ -3,10 +3,13 @@ import { getUserActivity } from "../../../dataManager/dataManager";
 import { useParams } from "react-router-dom";
 import { BarChart, XAxis, YAxis, Tooltip, Bar, Legend } from "recharts";
 import "./DailyActivityChart.css";
+
+
 /**
  * DailyActivityChart component displays a bar chart showing daily activity for a user.
  * @returns {JSX.Element}
  */
+
 function DailyActivityChart() {
   // Extract userId from the URL using useParams
   const { userId } = useParams();
@@ -25,7 +28,7 @@ function DailyActivityChart() {
       try {
         // Get user activity data from the data manager
         const chartData = await getUserActivity(userId);
-        console.log(chartData)
+        console.log(chartData);
         // Update the userActivity state with the fetched data
         setUserActivity(chartData);
       } catch (err) {
@@ -48,41 +51,52 @@ function DailyActivityChart() {
     return <div>Loading...</div>;
   }
 
- // Format the label for X axis of the chart
-const formatLabel = (value, index) => {
-  return index + 1;
-};
+  // Format the label for X axis of the chart
+  const formatLabel = (value, index) => {
+    return index + 1;
+  };
 
-// Render the user's activity chart
-return (
-  <div className="Daily">
-    <h3>Activité quotidienne</h3>
-    <BarChart width={835} height={320} data={userActivity}>
-      <XAxis dataKey="day" tickCount={10} tickFormatter={formatLabel} />
-      <YAxis orientation="right" />
-      <Tooltip />
-      
+  // Render the user's activity chart
+  return (
+    <div className="Daily">
+      <h3>Activité quotidienne</h3>
+      <BarChart width={835} height={320} data={userActivity}>
+        <XAxis dataKey="day" tickCount={10} tickFormatter={formatLabel} />
+        <YAxis orientation="right" />
+        
 
-      <Bar dataKey="kilograms" fill="#E6000" barSize={7} name="Poids (Kg)" style={{ borderRadius: '3px 3px 0 0' }} />
-<Bar dataKey="calories" fill="red" barSize={7} name="Calories brûlées (kcal)" style={{ borderRadius: '3px 3px 0 0' }} />
-
-      <Legend
+        <Bar
+          dataKey="kilograms"
+          fill="#E6000"
+          barSize={7}
+          name="Poids (Kg)"
+          radius={[3, 3, 0, 0]}
+        />
+        <Bar
+          dataKey="calories"
+          fill="red"
+          barSize={7}
+          name="Calories brûlées (kcal)"
+          radius={[3, 3, 0, 0]}
+        />
+        <Legend
           verticalAlign="top"
           align="right"
           iconType="circle"
           label={{ fontSize: 24, fontWeight: 500 }}
         />
-         <style>
+                <Tooltip />
+
+        <style>
           {`
             .recharts-rectangle {
               border-radius: 3px 3px 0 0 !important;
             }
           `}
         </style>
-    </BarChart>
-  </div>
-);
-
+      </BarChart>
+    </div>
+  );
 }
 
 export default DailyActivityChart;

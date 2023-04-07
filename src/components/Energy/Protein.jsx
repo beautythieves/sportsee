@@ -3,6 +3,7 @@ import { getUserMainData } from "../../dataManager/dataManager";
 import { useParams } from "react-router-dom";
 import Protein from "./Protein.png";
 import "./Calory.css";
+import backgroundProt from "./backgroundProt.png";
 
 function Proteins() {
   const { userId } = useParams();
@@ -35,7 +36,7 @@ function Proteins() {
 
   return (
     <div className="Calory_Container Prot">
-      <div className="Calory_Button">
+      <div className="Calory_Button" style= {{backgroundImage:`url(${backgroundProt})` }}>
         <img src={Protein} alt="Protein icon" />
       </div>
       <div className="Calory_Number">
